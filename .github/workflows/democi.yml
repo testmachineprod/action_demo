@@ -1,0 +1,26 @@
+on:
+  # Trigger analysis when pushing in "main" branch. Change this to another branch if you need it
+  push:
+    branches:
+      - main
+name: Contract scan
+jobs:
+  tmscan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: TestMachine Scan
+        uses: testmachine-ai/github-action@main
+        with:
+          tm_repository_id: 27
+          tm_source: flor_go.zip
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TM_TOKEN_KEY: ${{ secrets.TM_TOKEN_KEY }}
+      - name: Upload result
+        uses: actions/upload-artifact@v3
+        with:
+          name: result-report
+          path: action_work_result_report.pdf
