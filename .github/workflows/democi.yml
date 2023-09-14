@@ -11,11 +11,17 @@ jobs:
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0
+      - name: configure solc
+        run: |
+          wget https://github.com/ethereum/solidity/releases/download/v0.8.20/solc-static-linux
+          chmod +x solc-static-linux
+          mkdir contracts
+          ./solc-static-linux --metadata --metadata-literal --abi --bin selfdestruct.sol -o contracts
       - name: TestMachine Scan
         uses: testmachine-ai/github-action@main
         with:
           tm_repository_id: 27
-          tm_source: flor_go.zip
+          tm_source: contracts/
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           TM_TOKEN_KEY: ${{ secrets.TM_TOKEN_KEY }}
