@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "@testmachine.ai/cli": "^0.1.63"
+  }
+}

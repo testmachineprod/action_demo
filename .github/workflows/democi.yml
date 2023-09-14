@@ -20,7 +20,7 @@ jobs:
       - name: TestMachine Scan
         uses: testmachine-ai/github-action@main
         with:
-          tm_repository_id: 27
+          tm_repository_id: 69
           tm_source: contracts/
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
